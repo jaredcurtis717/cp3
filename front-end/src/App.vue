@@ -21,7 +21,7 @@
     <router-view />
 
     <div class="githubRepo">
-      <p>github</p>
+      <a href="https://github.com/jaredcurtis717/cp3">github</a>
     </div>
   </div>
 </template>
