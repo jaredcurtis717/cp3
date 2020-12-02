@@ -1,17 +1,24 @@
 <template>
 <div class="home">
-
-  <div class="board">
-    <div class="tile" v-for="square in grid" :key="square.position">
-      <img :src="square.imagePath" />
+  <div class="body">
+    <div class="frontAndCenter">
+      <h1>Welcome!</h1>
     </div>
+
+    <h2>What is RogueChess?</h2>
+    <p>RogueChess is a browser-based game developed by Jared Curtis.  Players will try to build their team that match after match to become stronger and stronger.  Watch out though, if one of your pieces is killed in a match it is gone forever!  Everytime your piece gets a kill however, it grows stronger, being able to move further or in a different direction.  You will need to pick your battles, sometimes its better to retreat than lose a powerful piece forever!</p>
+    <h2>Is it ready to play?</h2>
+    <p>Unfortunately, the game is currently not playable. Eventually, players will be able to upload a picture of their piece to add to their team.  currently however, only the pre-made pieces are available to look at.  To view how a certain piece moves, take a look at the "View Pieces" tab.  This will always be available and shows all the squares a piece can move to.  When a piece "levels up" more moves will be available to them.  To see how a piece can be upgraded to gain more available moves, see the "Edit Pieces" tab.</p>
+    
+
   </div>
 
   <div class="pieces">
     <div class="pieceHolder" v-for="piece in pieces" :key="piece.id">
-      <img :src="'/images/' + piece.image" v-on:click="selectPiece(piece)">
+      <img :src="'/images/' + piece.image">
     </div>
   </div>
+
 </div>
 </template>
 
@@ -20,87 +27,28 @@ export default {
   name: 'Home',
   data() {
     return {
-     grid: [],
      pieces: [],
-     boardHeight: 5,
-     boardLength: 5,
     }
   },
   created() {
-    this.makeBoard();
     this.getPieces();
   },
   methods: {
-    makeBoard: function(){
-      console.log("Making board");
-      let pos = 0;
-      for(var y = 0; y < this.boardHeight; y++){
-        for(var x = 0; x < this.boardLength; x++){
-          var gridEntry = {};
-          gridEntry["position"] = pos;
-          gridEntry["xPosition"] = x;
-          gridEntry["yPosition"] = y;
-          gridEntry["imagePath"] = "/images/emptyBox.png";
-          this.grid.push(gridEntry);
-          pos+=1;
-        }
-      }
-    },
     getPieces: function(){
-      console.log("getting pieces")
+      console.log("getting pieces");
       this.pieces = this.$root.$data.pieces;
     },
-
-    selectPiece: function(p){
-      console.log("piece selected: " + p.name)
-      console.log("moves: " + p.moves)
-      this.grid.forEach(function(tile) {
-        if(tile.imagePath == "/images/blueBox.png"){
-          tile.imagePath = "/images/emptyBox.png"
-        }
-
-        if(tile.xPosition == 2 && tile.yPosition == 2){
-          tile.imagePath = "/images/" + p.image;
-        }
-
-        p.moves.forEach(function(move){
-          if((2 + move.x) == tile.xPosition && (2 - move.y) == tile.yPosition){
-            tile.imagePath = "/images/blueBox.png";
-          }
-        });
-      });
-    }
   }
 }
 </script>
 
 <style>
-  img{
-    max-width: 100%;
-    max-height: 100%;
+  .body{
+    padding: 30px;
   }
 
-  .board{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding-left: 6%;
-    padding-right: 6%;
-    height: 80vh;
-  }
-
-  .tile{
-    flex-shrink: 3;
-    width: 20%;
-    height: 20%;
+  .frontAndCenter{
     display: flex;
     justify-content: center;
-  }
-
-  .pieces{
-    height: 15vh;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
   }
 </style>

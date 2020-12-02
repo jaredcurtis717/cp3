@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <div class="welcome">
-      <p><strong>Welcome to RogueChess!</strong></p>
       <router-link to="/">
+        <p><strong>Welcome to RogueChess!</strong></p>
+      </router-link>
+      <router-link to="/Play">
+        <p>Pick team</p>
+      </router-link>
+      <router-link to="/View">
         <p>View Pieces</p>
       </router-link>
       <router-link to="/Edit">
@@ -30,11 +35,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background-color: #04b825;
   }
 
   .githubRepo{
     display: flex;
     justify-content: center;
-    backgroud-color: blue;
+    background-color: #04b825;
   }
 </style>

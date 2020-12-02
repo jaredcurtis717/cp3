@@ -8,7 +8,7 @@ let mock = [{
   id:2,
   name: "guy",
   moves: [{x:1,y:0},{x:-1,y:0},{x:0,y:1}],
-  image: "guy.png"
+  image: "guy.png",
 }
 ]
 

@@ -3,7 +3,7 @@
 
   <div class="board">
     <div class="tile" v-for="square in grid" :key="square.position">
-      <img :src="square.imagePath" v-on:click="selectTile(square)"/>
+      <img :src="square.imagePath" />
     </div>
   </div>
 
@@ -22,11 +22,8 @@ export default {
     return {
      grid: [],
      pieces: [],
-     selectedPiece: {},
-     pieceSelected: false,
      boardHeight: 5,
      boardLength: 5,
-     newMove: {},
     }
   },
   created() {
@@ -56,10 +53,7 @@ export default {
 
     selectPiece: function(p){
       console.log("piece selected: " + p.name)
-
-      this.pieceSelected = true;
-      this.selectedPiece = p;
-
+      console.log("moves: " + p.moves)
       this.grid.forEach(function(tile) {
         if(tile.imagePath == "/images/blueBox.png"){
           tile.imagePath = "/images/emptyBox.png"
@@ -75,30 +69,6 @@ export default {
           }
         });
       });
-    },
-
-    selectTile: function(tile){
-      console.log("tile selected: " + tile.xPosition + " " + tile.yPosition)
-      if(this.pieceSelected){
-        if(tile.imagePath == "/images/blueBox.png"){
-          tile.imagePath = "/images/emptyBox.png";
-          /* remove move from piece */
-          for(var i = this.selectedPiece.moves.length - 1; i >= 0; i--){
-            if (this.selectedPiece.moves[i].x == tile.xPosition - 2 && tile.yPosition == (this.selectedPiece.moves[i].y * -1 + 2)) {
-              this.selectedPiece.moves.splice(i,1);
-            }
-          }
-        }
-        else if(tile.imagePath == "/images/emptyBox.png"){
-          tile.imagePath = "/images/blueBox.png";
-          /* add move to piece */
-          this.newMove = {};
-          this.newMove["x"] = tile.xPosition - 2;
-          this.newMove["y"] = (tile.yPosition * -1 + 2);
-          this.selectedPiece.moves.push(this.newMove);
-        }
-
-      }
     }
   }
 }
