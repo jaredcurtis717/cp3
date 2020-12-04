@@ -13,6 +13,9 @@
       <router-link to="/Edit">
         <p>Edit Pieces</p>
       </router-link>
+      <router-link to="/Create">
+        <p>Make Piece</p>
+      </router-link>
       <router-link to="/Play">
         <p>Play</p>
       </router-link>

@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Edit from "../views/Edit.vue";
 import Play from "../views/Play.vue";
 import View from "../views/View.vue";
+import Create from "../views/Create.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/view",
     name: "View",
     component: View
+  },
+  {
+    path: "/create",
+    name: "Create",
+    component: Create
   },
 
 ];

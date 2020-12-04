@@ -9,13 +9,16 @@
 
   <div class="pieces">
     <div class="pieceHolder" v-for="piece in pieces" :key="piece.id">
-      <img :src="'/images/' + piece.image" v-on:click="selectPiece(piece)">
+      <img :src="piece.image" v-on:click="selectPiece(piece)">
     </div>
   </div>
 </div>
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
   name: 'Home',
   data() {
@@ -46,9 +49,15 @@ export default {
         }
       }
     },
-    getPieces: function(){
+    async getPieces(){
       console.log("getting pieces")
-      this.pieces = this.$root.$data.pieces;
+      try {
+        let response = await axios.get("/api/pieces");
+        this.pieces = response.data;
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     selectPiece: function(p){
@@ -60,7 +69,7 @@ export default {
         }
 
         if(tile.xPosition == 2 && tile.yPosition == 2){
-          tile.imagePath = "/images/" + p.image;
+          tile.imagePath = p.image;
         }
 
         p.moves.forEach(function(move){
@@ -96,9 +105,12 @@ export default {
     display: flex;
     justify-content: center;
   }
+  .pieceHolder{
+    max-height: 15vh;
+    max-width: 25%;
+  }
 
   .pieces{
-    height: 15vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
